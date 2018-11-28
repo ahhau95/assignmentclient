@@ -16,15 +16,14 @@ export class MovieCard extends Component {
   }
 
   buttonHandler = () => {
-    //window.location = null;
     //console.log('buttonHandler: ', this.props.place.mapslink);
-    window.location = this.props.place.mapslink;
+    window.open(this.props.place.mapslink); //open link with new window tab
   };
 
   buttonSearch = () => {
-    console.log('buttonSearch: ', this.props.place.youtubelink);
+    //console.log('buttonSearch: ', this.props.place.youtubelink);
     //window.location = this.props.place.youtubelink;
-    window.location = 'https://www.youtube.com/watch?v=SrI4Le-rt98';
+    window.open(this.props.place.youtubelink);
   };
 
   render() {
