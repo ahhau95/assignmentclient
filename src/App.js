@@ -109,13 +109,11 @@ class App extends Component {
     });
     return (
       <div className="App">
+        <Jumbotron id="jumboheader">
+          <h1 className="display-4">Place Search</h1>
+          <p className="lead">Search for place information and youtube link</p>
+        </Jumbotron>
         <Container>
-          <Jumbotron id="jumboheader">
-            <h1 className="display-4">Place Search</h1>
-            <p className="lead">
-              Search for place information and youtube link
-            </p>
-          </Jumbotron>
           <Row>
             <Col>
               <Alert

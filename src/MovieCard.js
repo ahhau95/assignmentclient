@@ -15,6 +15,18 @@ export class MovieCard extends Component {
     super(props);
   }
 
+  buttonHandler = () => {
+    //window.location = null;
+    //console.log('buttonHandler: ', this.props.place.mapslink);
+    window.location = this.props.place.mapslink;
+  };
+
+  buttonSearch = () => {
+    console.log('buttonSearch: ', this.props.place.youtubelink);
+    //window.location = this.props.place.youtubelink;
+    window.location = 'https://www.youtube.com/watch?v=SrI4Le-rt98';
+  };
+
   render() {
     let {
       title,
@@ -25,6 +37,9 @@ export class MovieCard extends Component {
       youtubelink,
       picturelink
     } = this.props.place;
+
+    //console.log('render: ', mapslink);
+
     return (
       <div>
         <Card>
@@ -41,11 +56,13 @@ export class MovieCard extends Component {
             </CardSubtitle>
             <br />
             <CardSubtitle>
-              <strong>Google Maps Link:</strong> {mapslink}
+              <strong>Google Maps Link:</strong>{' '}
+              <button onClick={this.buttonHandler}>See Map</button>
             </CardSubtitle>
             <br />
             <CardSubtitle>
-              <strong>Youtube Link:</strong> {youtubelink}
+              <strong>Youtube Link:</strong>{' '}
+              <button onClick={this.buttonSearch}>See Video</button>
             </CardSubtitle>
             <br />
 
