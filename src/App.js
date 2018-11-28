@@ -23,7 +23,7 @@ class App extends Component {
     this.state = {
       alertVisible: false,
       title: '',
-      movies: []
+      location: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -35,11 +35,11 @@ class App extends Component {
     this.setState({ alertVisible: false });
   }
 
-  getAllMovies = () => {
+  getallplace = () => {
     axios
-      .get('https://fast-ocean-16315.herokuapp.com/getallmovies')
+      .get('https://powerful-headland-97969.herokuapp.com/getallplace')
       .then(result => {
-        this.setState({ movies: result.data });
+        this.setState({ location: result.data });
       })
       .catch(error => {
         console.log(error);
@@ -47,7 +47,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getAllMovies();
+    this.getallplace();
   }
 
   //for form
@@ -55,7 +55,7 @@ class App extends Component {
     e.preventDefault();
     this.setState({ alertVisible: false });
 
-    const query = `https://fast-ocean-16315.herokuapp.com/getmovie?title=${
+    const query = `https://powerful-headland-97969.herokuapp.com/getplace?title=${
       this.state.title
     }`;
 
@@ -68,7 +68,7 @@ class App extends Component {
         if (result.data === 'Not found') {
           this.setState({ alertVisible: true });
         }
-        this.getAllMovies();
+        this.getallplace();
       })
       .catch(error => {
         alert('Error: ', error);
@@ -78,21 +78,21 @@ class App extends Component {
   // for form field
   onChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.title]: e.target.value
     });
   }
 
-  removeMovie(title) {
+  removeplace(title) {
     this.setState({
-      movies: this.state.movies.filter(movie => {
-        if (movie.title !== title) return movie;
+      location: this.state.location.filter(place => {
+        if (place.title !== title) return place;
       })
     });
-    const query = `https://fast-ocean-16315.herokuapp.com/deletemovie?title=${title}`;
+    const query = `https://powerful-headland-97969.herokuapp.com/deleteplace?title=${title}`;
     axios
       .get(query)
       .then(result => {
-        this.getAllMovies();
+        this.getallplace();
       })
       .catch(error => {
         alert('Error: ', error);
@@ -100,10 +100,10 @@ class App extends Component {
   }
 
   render() {
-    let movieCards = this.state.movies.map(movie => {
+    let movieCards = this.state.location.map(place => {
       return (
-        <Col sm="4" key={movie.title}>
-          <MovieCard removeMovie={this.removeMovie.bind(this)} movie={movie} />
+        <Col sm="4" key={place.title}>
+          <MovieCard removeplace={this.removeplace.bind(this)} place={place} />
         </Col>
       );
     });
@@ -111,8 +111,10 @@ class App extends Component {
       <div className="App">
         <Container>
           <Jumbotron id="jumboheader">
-            <h1 className="display-4">Movie Search</h1>
-            <p className="lead">Search for movies</p>
+            <h1 className="display-4">Place Search</h1>
+            <p className="lead">
+              Search for place information and youtube link
+            </p>
           </Jumbotron>
           <Row>
             <Col>
@@ -129,12 +131,10 @@ class App extends Component {
             <Col>
               <Form onSubmit={this.onSubmit}>
                 <FormGroup>
-                  <Label for="title">Enter movie title</Label>
+                  <Label for="title">Enter the place</Label>
                   <Input
-                    type="text"
-                    name="title"
-                    id="title"
-                    placeholder="enter movie title..."
+                    title="title"
+                    placeholder="Enter place name"
                     onChange={this.onChange}
                   />
                 </FormGroup>
